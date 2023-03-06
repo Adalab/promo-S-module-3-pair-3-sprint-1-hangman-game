@@ -1,7 +1,7 @@
-import '../src/styles/App.scss';
+import '../styles/App.scss';
 
 function App() {
-  return (
+  return <div className="App">{
     <div class="page">
       <header>
         <h1 class="header__title">Juego del ahorcado</h1>
@@ -62,7 +62,7 @@ function App() {
         </section>
       </main>
     </div>
-  );
+  }</div>;
 }
 
 export default App;
