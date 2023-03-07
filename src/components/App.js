@@ -5,12 +5,25 @@ import { useState } from 'react';
 function App() {
 
   const [numberOfErrors, setNumberOfErrors] = useState(0);
+  const [lastLetter, setLastLetter] = useState('');
+
 
   function handleBtnIncrease(ev) {
     ev.preventDefault();
     setNumberOfErrors(numberOfErrors + 1)
-    console.log(numberOfErrors)
   }
+
+  function handleInput(ev) {
+    const inputLetter = ev.target.value;
+
+    let regex = new RegExp("^[ñíóáéú a-zA-Z ]+$");
+    if (regex.test(inputLetter)) {
+      setLastLetter(inputLetter);
+    } else {
+      console.log('letra no válida')
+    }
+  }
+
 
   return <div className="App">{
     <div class="page">
@@ -53,6 +66,8 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              value={lastLetter}
+              onChange={handleInput}
             />
           </form>
           <button className="btn-increase" onClick={handleBtnIncrease}>Incrementar</button>
