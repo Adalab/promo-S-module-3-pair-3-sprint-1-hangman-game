@@ -6,6 +6,8 @@ function App() {
 
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
+  const [word, setWord] = useState('pepito');
+  const [userLetters, setUserLetters] = useState([]);
 
 
   function handleBtnIncrease(ev) {
@@ -15,15 +17,29 @@ function App() {
 
   function handleInput(ev) {
     const inputLetter = ev.target.value;
-
-    let regex = new RegExp("^[ñíóáéú a-zA-Z ]+$");
+    let regex = new RegExp('^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$', 'u');
     if (regex.test(inputLetter)) {
       setLastLetter(inputLetter);
     } else {
-      console.log('letra no válida')
+      console.log('Letra no válida')
     }
+    setUserLetters(inputLetter);
+
   }
 
+  function renderSolutionLetters(ev) {
+    const wordLetters = word.split('');
+
+    return wordLetters.map((letter) => {
+
+      if (userLetters.includes(letter.toLocaleLowerCase)) {
+        <li className="letter">{letter}</li>
+      } else {
+        <li className="letter"></li>
+
+      }
+    })
+  }
 
   return <div className="App">{
     <div class="page">
@@ -35,16 +51,7 @@ function App() {
           <div class="solution">
             <h2 class="title">Solución:</h2>
             <ul class="letters">
-              <li class="letter">k</li>
-              <li class="letter">a</li>
-              <li class="letter"></li>
-              <li class="letter">a</li>
-              <li class="letter">k</li>
-              <li class="letter">r</li>
-              <li class="letter"></li>
-              <li class="letter">k</li>
-              <li class="letter">e</li>
-              <li class="letter">r</li>
+              {renderSolutionLetters()}
             </ul>
           </div>
           <div class="error">
@@ -60,6 +67,7 @@ function App() {
           <form class="form">
             <label class="title" for="last-letter">Escribe una letra:</label>
             <input
+              //pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
               autocomplete="off"
               class="form__input"
               maxlength="1"
