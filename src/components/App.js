@@ -6,7 +6,7 @@ function App() {
 
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
-  const [word, setWord] = useState('pepito');
+  const [word, setWord] = useState('Pepito');
   const [userLetters, setUserLetters] = useState([]);
 
 
@@ -28,49 +28,47 @@ function App() {
   }
 
   function renderSolutionLetters(ev) {
+    //fraccionamos la palabra dentro del array, cada letra será un elemento del array:
     const wordLetters = word.split('');
-
-    return wordLetters.map((letter) => {
-
-      if (userLetters.includes(letter.toLocaleLowerCase)) {
-        <li className="letter">{letter}</li>
+    return wordLetters.map((letter, index) => {
+      if (letter.toLowerCase() === userLetters) {
+        return <li key={index} className="letter">{letter}</li>
       } else {
-        <li className="letter"></li>
-
+        return <li key={index} className="letter"></li>
       }
     })
   }
 
   return <div className="App">{
-    <div class="page">
+    <div className="page">
       <header>
-        <h1 class="header__title">Juego del ahorcado</h1>
+        <h1 className="header__title">Juego del ahorcado</h1>
       </header>
-      <main class="main">
+      <main className="main">
         <section>
-          <div class="solution">
-            <h2 class="title">Solución:</h2>
-            <ul class="letters">
+          <div className="solution">
+            <h2 className="title">Solución:</h2>
+            <ul className="letters">
               {renderSolutionLetters()}
             </ul>
           </div>
-          <div class="error">
-            <h2 class="title">Letras falladas:</h2>
-            <ul class="letters">
-              <li class="letter">f</li>
-              <li class="letter">q</li>
-              <li class="letter">h</li>
-              <li class="letter">p</li>
-              <li class="letter">x</li>
+          <div className="error">
+            <h2 className="title">Letras falladas:</h2>
+            <ul className="letters">
+              <li className="letter">f</li>
+              <li className="letter">q</li>
+              <li className="letter">h</li>
+              <li className="letter">p</li>
+              <li className="letter">x</li>
             </ul>
           </div>
-          <form class="form">
-            <label class="title" for="last-letter">Escribe una letra:</label>
+          <form className="form">
+            <label className="title" htmlFor="last-letter">Escribe una letra:</label>
             <input
               //pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
-              autocomplete="off"
-              class="form__input"
-              maxlength="1"
+              autoComplete="off"
+              className="form__input"
+              maxLength="1"
               type="text"
               name="last-letter"
               id="last-letter"
@@ -81,20 +79,20 @@ function App() {
           <button className="btn-increase" onClick={handleBtnIncrease}>Incrementar</button>
 
         </section>
-        <section class={`dummy error-${numberOfErrors}`}>
-          <span class="error-13 eye"></span>
-          <span class="error-12 eye"></span>
-          <span class="error-11 line"></span>
-          <span class="error-10 line"></span>
-          <span class="error-9 line"></span>
-          <span class="error-8 line"></span>
-          <span class="error-7 line"></span>
-          <span class="error-6 head"></span>
-          <span class="error-5 line"></span>
-          <span class="error-4 line"></span>
-          <span class="error-3 line"></span>
-          <span class="error-2 line"></span>
-          <span class="error-1 line"></span>
+        <section className={`dummy error-${numberOfErrors}`}>
+          <span className="error-13 eye"></span>
+          <span className="error-12 eye"></span>
+          <span className="error-11 line"></span>
+          <span className="error-10 line"></span>
+          <span className="error-9 line"></span>
+          <span className="error-8 line"></span>
+          <span className="error-7 line"></span>
+          <span className="error-6 head"></span>
+          <span className="error-5 line"></span>
+          <span className="error-4 line"></span>
+          <span className="error-3 line"></span>
+          <span className="error-2 line"></span>
+          <span className="error-1 line"></span>
         </section>
       </main>
     </div>
